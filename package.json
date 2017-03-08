@@ -1,0 +1,15 @@
+{
+  "name": "Jira-Cli",
+  "version": "0.0.1",
+  "description": "Playing around with Jira",
+  "main": "index.js",
+  "author": "magnus udbjorg <magnus@udbjorg.net>",
+  "license": "MIT",
+  "dependencies": {
+    "caporal": "^0.3.0",
+    "moment": "^2.17.1",
+    "prompt": "^1.0.0",
+    "superagent": "^3.5.0",
+    "thunkify": "^2.1.2"
+  }
+}
