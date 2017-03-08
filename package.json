@@ -1,5 +1,5 @@
 {
-  "name": "Jira-Cli",
+  "name": "jira-tempo-cli",
   "version": "0.0.1",
   "description": "Playing around with Jira",
   "main": "index.js",
@@ -11,5 +11,8 @@
     "prompt": "^1.0.0",
     "superagent": "^3.5.0",
     "thunkify": "^2.1.2"
-  }
+  },
+  "bin": {
+   "jira-cli": "./index.js"
+ }
 }

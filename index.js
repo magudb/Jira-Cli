@@ -1,9 +1,9 @@
+#!/usr/bin/env node
 const prog = require('caporal');
 const fs = require("fs");
 const credentials = require("./credentials");
 const jira = require("./jira");
-const package = fs.readFileSync("package.json");
-const packageJson = JSON.parse(package);
+const myProgVersion = require('./package.json').version;
 const prompt = require('prompt');
 const prompter = (questions) => {
     return new Promise((resolved, rejected) => {
@@ -16,7 +16,8 @@ const prompter = (questions) => {
 }
 
 prog
-    .version(packageJson.version)
+    .version(myProgVersion)
+    .description('A cli for Tempo time reg')
     .command('init', 'initialize cli')
     .action((args, options, logger) => {
         credentials.Prompt()
