@@ -5,6 +5,8 @@ const credentials = require("./credentials");
 const jira = require("./jira");
 const myProgVersion = require('./package.json').version;
 const prompt = require('prompt');
+const moment = require("moment");
+
 const prompter = (questions) => {
     return new Promise((resolved, rejected) => {
         prompt.start();
@@ -26,18 +28,16 @@ prog
             .catch(result => logger.error(result));
     })
     .command("log-time", "For logging time in tempo")
-    .option('--issue <issue>', 'name of issue')
-    .option('--time <time>', 'time to log', prog.FLOAT)
-    .option('--date <date>', 'date formatted as YYYY-MM-DD')
-    .option('--comment <comment>', 'the log comment, will default to "Time logged"')
+    .option('--issue <issue>', 'name of issue', null, null, true)
+    .option('--time <time>', 'time to log', prog.FLOAT, null, true)
+    .option('--date <date>', 'date formatted as YYYY-MM-DD', null, moment().format('YYYY-MM-DD'), false )
+    .option('--comment <comment>', 'the log comment, will default to "Time logged"', null, "Time logged", false)
     .action(async (args, options, logger) => {        
         var issues = await jira.QueryIssue(options.issue);
         if (issues.length > 1) {
            throw new Error("Use a more precise issue key")
         }
-        if(!options.comment){
-            options.comment = "Time logged"
-        }
+       
         var issue = issues[0];       
         var timeRemaning =await jira.GetRemainingHour(options.date, options.time, issue.key);
         try {
